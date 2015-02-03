@@ -23,6 +23,11 @@ body{
 	
 }
 
+.optionBlock {
+	display: inline;
+	
+}
+
 .option {
 	border: 1px solid #aaa;
 	border-radius: 5px;
@@ -140,9 +145,6 @@ body{
 			.option.wrong .head i, .option.right .head i{
 				opacity:1;
 			}
-		
-	
-	
 	
 .or {
 	display: inline-block;
@@ -152,8 +154,8 @@ body{
 	font-weight: 100;
 }
 
-	.or:after{
-		
+	.optionBlock:nth-child(3) .or {
+		display: none;
 	}
 	
 .response {

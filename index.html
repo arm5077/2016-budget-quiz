@@ -14,9 +14,6 @@
 	<!-- Site-specific data -->
 	<script src="data.json"></script>
 
-	<!-- Site-specific scripts -->
-	<script src="scripts.js"></script>
-
 	<!-- Site-specific styles -->
 	<link rel="stylesheet" href="styles.css" />
 	
@@ -24,56 +21,39 @@
 </head>
 
 <body ng-controller="quizController">
-	<div class="question">
+	<div class="question" ng-repeat="question in questions">
 		<div class = "title">Which costs more?</div>
-		<div class = "option">
-			<div class = "head">
-				<i class="fa fa-check-circle"></i>
-				Department of State
-				<div class = "subhead">Administration of Foreign Affairs</div>
+		
+		<div class = "optionBlock" ng-repeat="option in question.options">
+			<div class = "option">
+				<div class = "head">
+					<i class="fa fa-check-circle"></i>
+					{{option["Agency Name"]}}
+					<div class = "subhead">{{option["Bureau Name"]}}</div>
 
-			</div>
-
-			<div class = "text">
-				<h1>Educational and Cultural Exchange Programs</h1>
-				<h2>
-					<table>
-						<tr>
-							<td>Used for:</td>
-							<td>Foreign information and exchange activities</td>
-						</tr>
-					</table>
-				</h2>
-				<div class = "money">
-					<table><tr><td>$100,000,000</td></tr></table>
 				</div>
-			</div>
+
+				<div class = "text">
+					<h1>{{option["Account Name"]}}</h1>
+					<h2>
+						<table>
+							<tr>
+								<td>Used for:</td>
+								<td>{{option["Subfunction Title"]}}</td>
+							</tr>
+						</table>
+					</h2>
+					<div class = "money">
+						<table><tr><td>{{option["2016"]}}</td></tr></table>
+					</div>
+				</div>
 			
+			</div>
+		
+			<div class = "or">or</div>
 		</div>
 		
-		<div class = "or">or</div>
-		
-		<div class = "option right">
-			<div class = "head">
-				<i class="fa fa-times-circle"></i>
-				Railroad Retirement Board
-				<div class = "subhead">Railroad Retirement Board</div>
-			</div>
-
-			<div class = "text">
-				<h1>Dual Benefits Payments Account</h1>
-				<h2>
-					<table>
-						<tr>
-							<td>Used for:</td>
-							<td>General retirement and disability insurance (excluding social se</td>
-						</tr>
-					</table>
-				</h2>
-			</div>
-		</div>	
-		
-		<div class = "response">
+		<div class = "response" ng-show="question.answered">
 			Yes! You're 2 for 2. 
 		</div>
 			
@@ -81,5 +61,8 @@
 	
 	
 </body>
+
+<!-- Site-specific scripts -->
+<script src="scripts.js"></script>
 
 </html>
