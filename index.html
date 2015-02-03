@@ -5,6 +5,9 @@
 	<!-- jQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
+	<!-- FontAwesome -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
 	<!-- Site-specific data -->
 	<script src="data.json"></script>
 
@@ -14,15 +17,18 @@
 	<!-- Site-specific styles -->
 	<link rel="stylesheet" href="styles.css" />
 	
+	
 </head>
 
 <body>
 	<div class="question">
 		<div class = "title">Which costs more?</div>
-		
 		<div class = "option">
-			<div class = "head">Department of State
+			<div class = "head">
+				<i class="fa fa-check-circle"></i>
+				Department of State
 				<div class = "subhead">Administration of Foreign Affairs</div>
+
 			</div>
 
 			<div class = "text">
@@ -35,13 +41,19 @@
 						</tr>
 					</table>
 				</h2>
+				<div class = "money">
+					<table><tr><td>$100,000,000</td></tr></table>
+				</div>
 			</div>
+			
 		</div>
 		
 		<div class = "or">or</div>
 		
-		<div class = "option">
-			<div class = "head">Railroad Retirement Board
+		<div class = "option right">
+			<div class = "head">
+				<i class="fa fa-times-circle"></i>
+				Railroad Retirement Board
 				<div class = "subhead">Railroad Retirement Board</div>
 			</div>
 
@@ -56,8 +68,11 @@
 					</table>
 				</h2>
 			</div>
-		</div>
+		</div>	
 		
+		<div class = "response">
+			Yes! You're 2 for 2. 
+		</div>
 			
 	</div>
 	

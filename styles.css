@@ -12,6 +12,17 @@ body{
 	
 }
 
+.question {
+	
+	
+}
+
+.question.done {
+	border-bottom: 1px solid #eee;
+	margin-bottom:20px;
+	
+}
+
 .option {
 	border: 1px solid #aaa;
 	border-radius: 5px;
@@ -20,6 +31,7 @@ body{
 	width: 44.2%;
 	display:inline-block;
 	vertical-align:top;
+	position:relative;
 }
 	.option:hover{
 		background-color: #eee;
@@ -36,15 +48,28 @@ body{
 	}
 		.option:hover .head{
 			opacity: 1;
-			
 		}
 	
-		.option .head .subhead {
-			font-weight: 100;	
-		}
+			.option .head .subhead {
+				font-weight: 100;	
+			}
+		
+			.option .head i {
+				float: right;
+				display: inline-block;
+				font-size: 32pt;
+				margin-right: 2px;
+				transition:all .2s;
+				opacity: 0;
+			}
+			
+				.option:hover .head i {
+					opacity: 1;
+				}
 		
 		.option .text {
 			margin: 15px 0px;
+			position:relative;
 		}
 		
 		.option .text h1 {
@@ -71,10 +96,70 @@ body{
 				font-weight:600;
 			}
 			
+	.option .text .money {
+		position:absolute;
+		width:100%;
+		height:100%;
+		text-align:center;
+		font-size:25pt;
+		background-color:rgba(255,255,255,.9);
+		top:0;
+		left:0;
+		font-weight:900;
+		display:none;
+	}
+	
+		.option .text .money table {
+			width:100%;
+			height:100%;
+			
+		}
+	
+	.option.wrong{
+		
+	}	
+	
+	.option.right {
+		
+		
+	}
+	
+		.option.right .head, .option.wrong .head{
+			opacity:1;
+
+		}
+	
+		.option.wrong .head {
+			background-color: #952226;
+		}
+		
+		.option.right .head {
+			background-color: #62998F;
+		}
+		
+			.option.wrong .head i, .option.right .head i{
+				opacity:1;
+			}
+		
+	
+	
+	
 .or {
 	display: inline-block;
 	font-size: 20pt;
 	width: 10%;
 	text-align: center;
 	font-weight: 100;
+}
+
+	.or:after{
+		
+	}
+	
+.response {
+	text-align: center;
+	padding:30px 0px 0px;
+	font-size:20pt;
+	font-weight:900;
+	
 }
