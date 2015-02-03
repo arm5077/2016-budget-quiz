@@ -7,6 +7,7 @@
 
 	<!-- Angular -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.1/angular-animate.js"></script>
 	
 	<!-- FontAwesome -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -24,8 +25,9 @@
 	<div class="question" ng-repeat="question in questions">
 		<div class = "title">Which costs more?</div>
 		
-		<div class = "optionBlock" ng-repeat="option in question.options">
-			<div class = "option">
+		<div class = "optionBlock" ng-repeat="option in question.options" ng-disable="question.answered">
+			<div class = "or" center>or</div>
+			<div class = "option" ng-click = "evaluateAnswer(option, question)" ng-class="{right: question.correct == true && option.clicked == true, wrong: question.correct == false && option.clicked == true}">
 				<div class = "head">
 					<i class="fa fa-check-circle"></i>
 					{{option["Agency Name"]}}
@@ -43,18 +45,17 @@
 							</tr>
 						</table>
 					</h2>
-					<div class = "money">
-						<table><tr><td>{{option["2016"]}}</td></tr></table>
+					<div class = "money" ng-show="question.answered">
+						<table><tr><td>${{option["2016"].formatMoney()}}</td></tr></table>
 					</div>
 				</div>
 			
 			</div>
-		
-			<div class = "or">or</div>
 		</div>
 		
 		<div class = "response" ng-show="question.answered">
-			Yes! You're 2 for 2. 
+			<span ng-show="question.correct">Yes!</span> <span ng-show="!question.correct">Sorry, you got it wrong.</span>  You're {{correct}} for {{total}}. 
+			<span class = "next" ng-show="question.readyForNext" ng-click="addQuestion()">Next question</span>
 		</div>
 			
 	</div>

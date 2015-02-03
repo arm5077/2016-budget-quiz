@@ -1,6 +1,28 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
 
-body{
+
+@keyframes slidein {
+  from {
+    margin-left: -100%; 
+  }
+
+  to {
+    margin-left: 0%;
+  }
+}
+
+@keyframes slideout {
+  from {
+    margin-left: 0%; 
+  }
+
+  to {
+    margin-left: 100%;
+  }
+}
+
+
+body {
 	font-family: "Open Sans", sans-serif;
 }
 
@@ -8,19 +30,26 @@ body{
 	font-size: 23pt;
 	text-align: center;
 	font-weight: 100;
-	margin-bottom:20px;
-	
+	margin-bottom:20px;	
 }
 
 .question {
-	
-	
+	position:relative;
+	top:0;
+	left:0;
+	bottom-bottom: 1px solid #aaa;
+	margin-bottom:50px;
+	padding-bottom:50px;
+	width:100%;
+	display:none;
 }
 
-.question.done {
-	border-bottom: 1px solid #eee;
-	margin-bottom:20px;
-	
+.question:last-of-type {
+	border:0;
+	margin:0;
+	padding:0;
+	left:0;
+	display:block;
 }
 
 .optionBlock {
@@ -111,7 +140,6 @@ body{
 		top:0;
 		left:0;
 		font-weight:900;
-		display:none;
 	}
 	
 		.option .text .money table {
@@ -154,7 +182,7 @@ body{
 	font-weight: 100;
 }
 
-	.optionBlock:nth-child(3) .or {
+	.optionBlock:nth-child(2) .or {
 		display: none;
 	}
 	
@@ -165,3 +193,28 @@ body{
 	font-weight:900;
 	
 }
+
+.next{
+	display:inline-block;
+	font-size: 14pt;
+	background-color: #76B6E3;
+	padding: 10px;
+	color: white;
+	margin-left: 10px;
+	opacity:.8;
+	width:152px;
+	height:25px;
+	transition:.5s all;
+	white-space: nowrap;
+}
+	.next:hover{
+		opacity:1;
+		cursor:pointer;
+		width:150px;
+	}
+	
+	.next.ng-hide {
+		opacity:0;
+		width:0px;
+
+	}
