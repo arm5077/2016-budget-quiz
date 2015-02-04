@@ -14,6 +14,9 @@
 	
 	<!-- FontAwesome -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	
+	<!-- Pym.js -->
+	<script src="pym.js"></script>
 
 	<!-- Site-specific data -->
 	<script src="data.json"></script>
@@ -73,11 +76,11 @@
 		<div class = "jumbotron">
 			{{ correct }} / {{ total }}
 		</div>
-		<p>The budget items you classified make up {{ (amassed / total_budget).toString().slice(0,5) }}% of President Obama's proposed expenditures. <a href="http://www.nationaljournal.com/budget/2016-budget-obama-graphic-winners-losers" target="_blank">Here's how the budget stacks up in full</a> &mdash; and <a href="http://www.nationaljournal.com/congress/obama-s-budget-is-done-now-it-s-the-gop-s-turn-20150202" target="_blank">what will happen next</a>.</p>
+		<p>The budget items you classified make up {{ (amassed / total_budget).toString().slice(0,5) }}% of President Obama's proposed expenditures.</p><p><a href="http://www.nationaljournal.com/budget/2016-budget-obama-graphic-winners-losers" target="_blank">Here's how the budget stacks up in full</a> &mdash; and <a href="http://www.nationaljournal.com/congress/obama-s-budget-is-done-now-it-s-the-gop-s-turn-20150202" target="_blank">what will happen next</a>.</p>
 		<div class = "social">
 			<button class = "next" onclick="window.scrollTo(0,0); location.reload()">Play again</button>
-			<a href="#" target="_blank"><button class = "next" style="background-color: #3B5998"><i class="fa fa-facebook"></i></button></a>
-			<a href="#" target="_blank"><button class = "next" style="background-color: #4099FF"><i class="fa fa-twitter"></i></button></a>
+			<a href="https://www.facebook.com/sharer/sharer.php?u=http://www.nationaljournal.com/white-house/obama-budget-2016-quiz-20150204" target="_blank"><button class = "next" style="background-color: #3B5998"><i class="fa fa-facebook"></i></button></a>
+			<a href="https://twitter.com/intent/tweet?original_referer=http://www.nationaljournal.com/white-house/obama-budget-2016-quiz-20150204&text=Which costs more, a year's supply of missiles or the Capitol Visitors Center? Put your budget savvy to the test:&:tw_p=tweetbutton&url=http://www.nationaljournal.com/white-house/obama-budget-2016-quiz-20150204" target="_blank"><button class = "next" style="background-color: #4099FF"><i class="fa fa-twitter"></i></button></a>
 		</div>
 	</div>
 
@@ -85,5 +88,10 @@
 
 <!-- Site-specific scripts -->
 <script src="scripts.js"></script>
+
+<script type="text/javascript">
+	var pymChild = new pym.Child();
+	setInterval(function(){ pymChild.sendHeight(); console.log("Sending pym ping!") }, 250);
+</script>
 
 </html>

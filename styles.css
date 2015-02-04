@@ -344,10 +344,15 @@ body {
 		font-size:13pt;
 	}
 	
-	span.next {
+	.next {
 		display:block;
-		width:90%;
+		width:96%;
 		margin:10px auto 0
 	}
+	
+	.results .jumbotron {
+		font-size: 35pt;
+	}
+	
 	
 }
