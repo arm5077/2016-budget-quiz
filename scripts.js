@@ -1,16 +1,24 @@
 app = angular.module("quizApp", ['ngAnimate']);
 app.controller("quizController", ["$scope", function($scope){
 	
-	max_difference_ratio = 10;
-	min_difference_ratio = 5;
+	max_difference_ratio = 10000;
+	min_difference_ratio = 1.1;
 	$scope.correct = 0;
 	$scope.total = 0;
 	$scope.questions = [];
+	$scope.progress = [];
+	$scope.place = -1;
+	for( i = 0; i < 15; i++ ){ $scope.progress.push({"answered": false}) };
+	
 	$scope.addQuestion = function(){
+		
+		// Increment place in timeline
+		$scope.place++;
+		
 		console.log([max_difference_ratio,min_difference_ratio]);
-		// Let's make sure we haven't bottomed out on difficulty
-		min_difference_ratio = Math.max(1, min_difference_ratio);
-		max_difference_ratio = Math.max(3, max_difference_ratio);
+		
+		// Let's make sure we haven't topped out on difficulty
+		min_difference_ratio = Math.min(700000, min_difference_ratio);
 		
 		// Let's get a random entry
 		var interval = Math.floor(Math.random() * data.length -1 );
@@ -23,14 +31,14 @@ app.controller("quizController", ["$scope", function($scope){
 			// Let's make a new array containing entries that are within the difference criteria of option1
 			eligible_data  = data.filter(function(datum){ 
 					if( 
-						( (datum["2016"] - options[0]["2016"]) / options[0]["2016"] >= min_difference_ratio && (datum["2016"] - options[0]["2016"]) / options[0]["2016"] <= max_difference_ratio )
+						( datum["2016"] / options[0]["2016"] >= min_difference_ratio && datum["2016"] / options[0]["2016"] <= max_difference_ratio )
 					||
-						( (options[0]["2016"] - datum["2016"]) / datum["2016"] >= min_difference_ratio && (options[0]["2016"] - datum["2016"]) / datum["2016"] <= max_difference_ratio )
+						( options[0]["2016"] / datum["2016"] >= min_difference_ratio && options[0]["2016"] / datum["2016"] <= max_difference_ratio )
 					) return true; 
 			});
-			console.log(eligible_data);
+			
 			if( eligible_data.length != 0 ) break;
-			interval++;
+			interval--;
 			
 			
 		}
@@ -49,18 +57,23 @@ app.controller("quizController", ["$scope", function($scope){
 			if( guess > question.options.filter(function(option){ return (guess != option["2016"] ? true : false ) })[0]["2016"] ) {
 				question.correct = true;
 				$scope.correct++;
-				max_difference_ratio /= 1.5;
+				max_difference_ratio = Math.sqrt(max_difference_ratio);
 				min_difference_ratio = Math.sqrt(min_difference_ratio);
 				
 			}
 			else {
 				question.correct = false;
-				max_difference_ratio *= 1.5;
-				min_difference_ratio = Math.exp(min_difference_ratio,2);
+				max_difference_ratio = Math.pow(max_difference_ratio,2);
+				min_difference_ratio = Math.pow(min_difference_ratio,2);
 			}
 			
 			$scope.total++;
 			question.answered = true;
+			
+			$scope.progress[$scope.place].answered = true;
+			$scope.progress[$scope.place].correct = question.correct;
+			
+			// Bring up "next" button
 			setTimeout(function(){ 
 				$scope.$apply(function(){
 					question.readyForNext = true;

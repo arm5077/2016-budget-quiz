@@ -22,12 +22,16 @@
 </head>
 
 <body ng-controller="quizController">
+	<div class = "progress">
+		<div class = "bar" ng-repeat="bar in progress" ng-class="{unanswered: bar.answered == false, selected: place == $index, correct: bar.correct == true, incorrect: bar.correct == false}">{{$index + 1 }}</div>
+	</div>
+	
 	<div class="question" ng-repeat="question in questions">
 		<div class = "title">Which costs more?</div>
 		
 		<div class = "optionBlock" ng-repeat="option in question.options" ng-disable="question.answered">
 			<div class = "or" center>or</div>
-			<div class = "option" ng-click = "evaluateAnswer(option, question)" ng-class="{right: question.correct == true && option.clicked == true, wrong: question.correct == false && option.clicked == true}">
+			<div class = "option" ng-click = "evaluateAnswer(option, question)" ng-class="{answered: question.answered == true, right: question.correct == true && option.clicked == true, wrong: question.correct == false && option.clicked == true}">
 				<div class = "head">
 					<i class="fa fa-check-circle"></i>
 					{{option["Agency Name"]}}
