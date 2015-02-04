@@ -257,7 +257,6 @@ body {
 	.next:hover{
 		opacity:1;
 		cursor:pointer;
-		width:150px;
 	}
 	
 	.next.ng-hide {
@@ -265,3 +264,55 @@ body {
 		width:0px;
 
 	}
+	
+@media screen and (max-width: 800px) {
+
+	.title {
+		margin: 10px 0px 15px;
+		font-size:19pt
+	}
+
+	.option {
+		width:100%;
+		display:block;
+	}
+	
+	.or {
+		width:100%;
+		height:auto !important;
+		line-height: 1em !important;
+		margin:10px auto;
+		font-size:15pt;
+	}
+
+	.option .text h1 {
+		font-size:16pt;
+	}
+	
+	.option .text h2 {
+		font-size:13pt;
+	}
+
+	.subhead {
+		display:inline;
+	}
+	
+		.subhead:before {
+			content:" | ";
+		}
+	
+	.option .head i {
+		font-size:18pt;
+	}
+	
+	.response {
+		font-size:13pt;
+	}
+	
+	span.next {
+		display:block;
+		width:90%;
+		margin:10px auto 0
+	}
+	
+}

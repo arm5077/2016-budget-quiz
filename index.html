@@ -2,6 +2,9 @@
 <html ng-app = "quizApp">
 
 <head>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 	<!-- jQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
@@ -58,7 +61,7 @@
 		</div>
 		
 		<div class = "response" ng-show="question.answered">
-			<span ng-show="question.correct">Yes!</span> <span ng-show="!question.correct">Sorry, you got it wrong.</span>  You're {{correct}} for {{total}}. 
+			<span class="message" ng-show="question.correct">Yes!</span> <span ng-show="!question.correct">Sorry, you got it wrong.</span>
 			<span class = "next" ng-show="question.readyForNext" ng-click="addQuestion()">Next question</span>
 		</div>
 			

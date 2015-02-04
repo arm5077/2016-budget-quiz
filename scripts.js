@@ -12,6 +12,9 @@ app.controller("quizController", ["$scope", function($scope){
 	
 	$scope.addQuestion = function(){
 		
+		// Scroll window to the top.
+		window.scrollTo(0,0);
+		
 		// Increment place in timeline
 		$scope.place++;
 		
