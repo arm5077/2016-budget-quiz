@@ -28,46 +28,59 @@
 	<div class = "progress">
 		<div class = "bar" ng-repeat="bar in progress" ng-class="{unanswered: bar.answered == false, selected: place == $index, correct: bar.correct == true, incorrect: bar.correct == false}">{{$index + 1 }}</div>
 	</div>
+	<div>
+		<div class="question" ng-repeat="question in questions" ng-hide="place >= progress.length">
+			<div class = "title">Which costs more?</div>
+			
+			<div class = "optionBlock" ng-repeat="option in question.options" ng-disable="question.answered">
+				<div class = "or" center>or</div>
+				<div class = "option" ng-click = "evaluateAnswer(option, question)" ng-class="{answered: question.answered == true, right: question.correct == true && option.clicked == true, wrong: question.correct == false && option.clicked == true}">
+					<div class = "head">
+						<i class="fa" ng-class="{'fa-check-circle': question.correct || question.correct == null, 'fa-times-circle': !question.correct}"></i>
+						{{option["Agency Name"]}}
+						<div class = "subhead">{{option["Bureau Name"]}}</div>
 	
-	<div class="question" ng-repeat="question in questions">
-		<div class = "title">Which costs more?</div>
-		
-		<div class = "optionBlock" ng-repeat="option in question.options" ng-disable="question.answered">
-			<div class = "or" center>or</div>
-			<div class = "option" ng-click = "evaluateAnswer(option, question)" ng-class="{answered: question.answered == true, right: question.correct == true && option.clicked == true, wrong: question.correct == false && option.clicked == true}">
-				<div class = "head">
-					<i class="fa fa-check-circle"></i>
-					{{option["Agency Name"]}}
-					<div class = "subhead">{{option["Bureau Name"]}}</div>
-
-				</div>
-
-				<div class = "text">
-					<h1>{{option["Account Name"]}}</h1>
-					<h2>
-						<table>
-							<tr>
-								<td>Used for:</td>
-								<td>{{option["Subfunction Title"]}}</td>
-							</tr>
-						</table>
-					</h2>
-					<div class = "money" ng-show="question.answered">
-						<table><tr><td>${{option["2016"].formatMoney()}}</td></tr></table>
 					</div>
+	
+					<div class = "text">
+						<h1>{{option["Account Name"]}}</h1>
+						<h2>
+							<table>
+								<tr>
+									<td>Used for:</td>
+									<td>{{option["Subfunction Title"]}}</td>
+								</tr>
+							</table>
+						</h2>
+						<div class = "money" ng-show="question.answered">
+							<table><tr><td>${{option["2016"].formatMoney()}}</td></tr></table>
+						</div>
+					</div>
+				
 				</div>
-			
 			</div>
-		</div>
-		
-		<div class = "response" ng-show="question.answered">
-			<span class="message" ng-show="question.correct">Yes!</span> <span ng-show="!question.correct">Sorry, you got it wrong.</span>
-			<span class = "next" ng-show="question.readyForNext" ng-click="addQuestion()">Next question</span>
-		</div>
 			
+			<div class = "response" ng-show="question.answered">
+				<span class="message" ng-show="question.correct">Yes!</span> <span ng-show="!question.correct">Sorry, you got it wrong.</span>
+				<button class = "next" ng-show="question.readyForNext && place < progress.length - 1 " ng-click="addQuestion()">Next question</button>
+				<button class = "next" ng-show="question.readyForNext && place == progress.length - 1" ng-click="finish()" >Finish</button>
+			</div>
+				
+		</div>
 	</div>
-	
-	
+	<div class = "results" ng-show="place >= progress.length">
+		<p>Your score:</p>
+		<div class = "jumbotron">
+			{{ correct }} / {{ total }}
+		</div>
+		<p>The budget items you classified make up {{ (amassed / total_budget).toString().slice(0,5) }}% of President Obama's proposed expenditures. <a href="http://www.nationaljournal.com/budget/2016-budget-obama-graphic-winners-losers" target="_blank">Here's how the budget stacks up in full</a> &mdash; and <a href="http://www.nationaljournal.com/congress/obama-s-budget-is-done-now-it-s-the-gop-s-turn-20150202" target="_blank">what will happen next</a>.</p>
+		<div class = "social">
+			<button class = "next" onclick="window.scrollTo(0,0); location.reload()">Play again</button>
+			<a href="#" target="_blank"><button class = "next" style="background-color: #3B5998"><i class="fa fa-facebook"></i></button></a>
+			<a href="#" target="_blank"><button class = "next" style="background-color: #4099FF"><i class="fa fa-twitter"></i></button></a>
+		</div>
+	</div>
+
 </body>
 
 <!-- Site-specific scripts -->

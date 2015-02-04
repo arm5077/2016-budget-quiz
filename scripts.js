@@ -7,8 +7,18 @@ app.controller("quizController", ["$scope", function($scope){
 	$scope.total = 0;
 	$scope.questions = [];
 	$scope.progress = [];
+	$scope.amassed = 0;
 	$scope.place = -1;
 	for( i = 0; i < 15; i++ ){ $scope.progress.push({"answered": false}) };
+	$scope.total_budget=0;
+	
+	setInterval(function(){console.log($scope.place)},500);
+	
+	// Reformat dollar amounts in data to type integer * 1000
+	data.forEach(function(data){
+		data["2016"] = parseInt(data["2016"].replace(/,/g, '')) * 1000;
+		$scope.total_budget += data["2016"];
+	});
 	
 	$scope.addQuestion = function(){
 		
@@ -17,8 +27,6 @@ app.controller("quizController", ["$scope", function($scope){
 		
 		// Increment place in timeline
 		$scope.place++;
-		
-		console.log([max_difference_ratio,min_difference_ratio]);
 		
 		// Let's make sure we haven't topped out on difficulty
 		min_difference_ratio = Math.min(700000, min_difference_ratio);
@@ -70,6 +78,7 @@ app.controller("quizController", ["$scope", function($scope){
 				min_difference_ratio = Math.pow(min_difference_ratio,2);
 			}
 			
+			$scope.amassed += question.options.reduce(function(prev, curr){ return prev["2016"] + curr["2016"]; });
 			$scope.total++;
 			question.answered = true;
 			
@@ -84,13 +93,11 @@ app.controller("quizController", ["$scope", function($scope){
 			},500);
 		}
 	};
-
-
-	// Reformat dollar amounts in data to type integer * 1000
-	data.forEach(function(data){
-		data["2016"] = parseInt(data["2016"].replace(/,/g, '')) * 1000;
-	});
-
+	
+	$scope.finish = function(){
+		$scope.place++;
+	};
+	
 	$scope.addQuestion();
 	
 }]);
